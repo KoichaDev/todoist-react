@@ -1,0 +1,11 @@
+@import './../../../assets/scss/abstracts/color-variables';
+
+.sidebar {
+  grid-area: sidebar;
+  background: map-get($clr-dark-mine-shaft, 'clr-dark-700');
+
+  ul {
+    display: flex;
+    flex-direction: column;
+  }
+}
