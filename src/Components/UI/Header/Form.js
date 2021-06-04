@@ -7,7 +7,7 @@ function Form() {
       <label htmlFor='search-todo' />
 
       <div className={classes['form__search']}>
-        <i class='fas fa-search'></i>
+        <i className='fas fa-search'></i>
         <input type='text' id='search-todo' placeholder='Search' />
       </div>
     </form>
