@@ -3,11 +3,18 @@ import PlusIcon from '../UI/Icons/PlusIcon';
 import classes from './Addtask.module.scss';
 
 function AddTask() {
-  let submitButtonContent = '';
+  const [toggleSubmitClass, setToggleSubmitClass] = useState('');
   const [isDisplay, setIsDisplay] = useState(true);
   const [task, setTask] = useState([]);
 
-  useEffect(() => {}, [task]);
+  // useEffect for toggling className on Add Task on the submit button
+  useEffect(() => {
+    const inputTextArea = task.length > 0;
+    inputTextArea
+      ? setToggleSubmitClass(classes['btn-red--enable'])
+      : setToggleSubmitClass(classes['btn-red--disabled']);
+    return inputTextArea;
+  }, [task]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -46,7 +53,7 @@ function AddTask() {
         </div>
         <button
           type='submit'
-          class={classes['btn-red--disable']}
+          className={toggleSubmitClass}
           title='Add Task First'
           aria-roledescription='Add a task first before you can click on it'>
           Add Task
