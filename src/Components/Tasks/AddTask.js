@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PlusIcon from '../UI/Icons/PlusIcon';
 import classes from './Addtask.module.scss';
 
 function AddTask() {
+  let submitButtonContent = '';
   const [isDisplay, setIsDisplay] = useState(true);
   const [task, setTask] = useState([]);
 
+  useEffect(() => {}, [task]);
+
   const submitHandler = (e) => {
     e.preventDefault();
+  };
+
+  const addTaskHandler = (e) => {
+    setTask(e.target.value);
   };
 
   return (
@@ -21,22 +28,30 @@ function AddTask() {
 
       <form onSubmit={submitHandler} className={classes['editor-area']}>
         <label htmlFor='add-item' />
-        <input
+        <textarea
           type='text'
           id='add-item'
-          className={classes['']}
           placeholder='E.g, Buy Gift tomorrow at 6pm'
+          onChange={addTaskHandler}
         />
         <div className={classes['editor-area__actions']}>
           <button>
-            <i class='fas fa-calendar-alt fa-sm'></i>
+            <i className='fas fa-calendar-alt fa-xs'></i>
             <span> Schedule</span>
           </button>
           <button>
-            <i class='fas fa-inbox'></i>
+            <i className='fas fa-inbox'></i>
             <span> Inbox</span>
           </button>
         </div>
+        <button
+          type='submit'
+          class={classes['btn-red--disable']}
+          title='Add Task First'
+          aria-roledescription='Add a task first before you can click on it'>
+          Add Task
+        </button>
+        <button>Cancel</button>
       </form>
     </div>
   );

@@ -25,14 +25,20 @@
   border-radius: 5px;
   border-width: thin;
 
-  input {
+  textarea {
+    display: block;
+    color: #8b8b8b;
+    background: #171717;
     width: 100%;
     height: 2em;
-    background: #171717;
-    color: #8b8b8b;
-    border: none;
     padding: 1em;
     margin-top: 8px;
+    border: none;
+    resize: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
 
     &:focus {
       outline: none;
@@ -47,9 +53,9 @@
     margin: 1em;
 
     button {
-      padding: 6px 1em;
+      padding: 4px 1em 6px 1em;
       border: 1px solid #8b8b8b;
-      border-radius: 10px;
+      border-radius: 5px;
       margin-right: 10px;
 
       &:hover {
@@ -57,8 +63,34 @@
       }
 
       span {
-        font-size: 14px;
+        font-size: 13px;
       }
     }
+  }
+
+  .btn-red {
+    font-size: 13px;
+    color: #fff;
+    background: #de4c4a;
+    margin-left: 1.2em;
+    margin-bottom: 1em;
+    padding: 4px 10px;
+    border: 1px solid #de4c4a;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  .btn-red--disable {
+    font-size: 13px;
+    color: #fff;
+    background: #de4c4a;
+    opacity: 0.5;
+    margin-left: 1.2em;
+    margin-bottom: 1em;
+    padding: 6px 10px;
+    border: 1px solid #de4c4a;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: not-allowed;
   }
 }
