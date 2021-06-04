@@ -11,23 +11,4 @@
       font-weight: bold;
     }
   }
-  .main__editor {
-    p {
-      cursor: pointer;
-      color: grey;
-      font-size: 1rem;
-
-      &:hover {
-        color: #de4c4a;
-      }
-
-      span {
-        margin-right: 1em;
-
-        .plus-icon {
-          color: #de4c4a;
-        }
-      }
-    }
-  }
 }
