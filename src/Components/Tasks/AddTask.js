@@ -18,6 +18,10 @@ function AddTask() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setTodo((prevTodo) => {
+      return [...prevTodo, task];
+    });
+    setTask('');
   };
 
   const addTaskHandler = (e) => {};
@@ -31,6 +35,7 @@ function AddTask() {
         type='text'
         id='add-item'
         placeholder='E.g, Buy Gift tomorrow at 6pm'
+        value={task}
         onChange={inputTaskHandler}
       />
       <div className={classes['editor-area__actions']}>
