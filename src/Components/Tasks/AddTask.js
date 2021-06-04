@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import uuid from 'react-uuid';
 import classes from './Addtask.module.scss';
+import TodoContext from './../../store/todo-context';
 
 function AddTask() {
   const [toggleSubmitClass, setToggleSubmitClass] = useState('');
   const [isDisplay, setIsDisplay] = useState(true);
   const [task, setTask] = useState('');
-  const [todo, setTodo] = useState([]);
+
+  const todoCtx = useContext(TodoContext);
 
   // useEffect for toggling className on Add Task on the submit button
   useEffect(() => {
@@ -18,13 +21,14 @@ function AddTask() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setTodo((prevTodo) => {
-      return [...prevTodo, task];
-    });
+
+    todoCtx.addTodo({ id: uuid(), task });
+
+    // setTodo((prevTodo) => {
+    //   return [...prevTodo, task];
+    // });
     setTask('');
   };
-
-  const addTaskHandler = (e) => {};
 
   const inputTaskHandler = (e) => setTask(e.target.value);
 
@@ -52,8 +56,7 @@ function AddTask() {
         type='submit'
         className={toggleSubmitClass}
         title='Add Task First'
-        aria-roledescription='Add a task first before you can click on it'
-        onClick={addTaskHandler}>
+        aria-roledescription='Add a task first before you can click on it'>
         Add Task
       </button>
       <button>Cancel</button>
