@@ -1,0 +1,16 @@
+@import './../../../assets/scss/abstracts/color-variables';
+
+.header {
+  grid-area: header;
+  background: map-get($clr-dark-mine-shaft, 'clr-dark-700');
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 15%);
+  padding: 1em;
+
+  > i:first-child {
+    margin-left: 2em;
+  }
+
+  i {
+    margin: 0 10px;
+  }
+}
