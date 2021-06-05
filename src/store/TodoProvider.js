@@ -9,7 +9,14 @@ const ACTION = {
 const todoReducer = (todo, action) => {
   switch (action.type) {
     case ACTION.ADD_TODO:
-      return { ...todo, items: action.todo };
+      // The concat() method is used to merge two or more arrays.
+      // This method does not change the existing arrays, but instead returns a new array.
+      // Concat gives us a brand new array instead of editing the old array in the memory, which is better solution
+      // This means when you add one task, then there will be array [0]. Adding another task, it will be [1],
+      // Adding one more task, it will be [2] etc.
+      const updatedTasks = todo.items.concat(action.todo);
+
+      return { ...todo, items: updatedTasks };
     default:
       return todo;
   }
