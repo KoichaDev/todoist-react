@@ -1,10 +1,9 @@
 import { createContext } from 'react';
 
 const TodoContext = createContext({
-  id: '',
   items: [],
-  completed: false,
-  addTodo: (todo) => {},
+  totalAmount: 0,
+  addTodo: (task) => {},
   removeTodo: (id) => {},
 });
 
