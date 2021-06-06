@@ -4,6 +4,7 @@ import { CheckBoxIcon, UnCheckBoxIcon } from './../UI/Icons/CheckBoxIcon';
 import EditIcon from './../UI/Icons/EditIcon';
 import ScheduleIcon from './../UI/Icons/ScheduleIcon';
 import CommentIcon from './../UI/Icons/CommentIcon';
+import TrashIcon from './../UI/Icons/TrashIcon';
 import classes from './TasksList.module.scss';
 
 function TasksList() {
@@ -36,6 +37,9 @@ function TasksList() {
               </button>
               <button role='Comment task' title='Comment your task'>
                 <CommentIcon />
+              </button>
+              <button>
+                <TrashIcon />
               </button>
             </div>
           </li>
