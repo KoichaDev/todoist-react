@@ -21,25 +21,42 @@ function TasksList() {
                 type='button'
                 role='checkbox'
                 aria-checked='false'
-                aria-label='Mark task as Complete'>
-                <UnCheckBoxIcon />
+                aria-label='Mark task as Complete'
+                title='Mark as your Todo task is completed'>
+                <UnCheckBoxIcon classname={classes['todo-list__action-uncheck-icon']} />
               </button>
               <p>{task}</p>
             </div>
           </li>
           <li>
             <div className={classes['todo-list__action']}>
-              <button role='Checkbox' title='Edit your task'>
-                <EditIcon />
+              <button
+                role='checkbox'
+                aria-checked='false'
+                aria-label='Mark task as Complete'
+                title='Edit your task'>
+                <EditIcon className={classes['todo-list__action-edit-icon']} />
               </button>
-              <button role='re-schedule task' title='Reschedule your task'>
-                <ScheduleIcon />
+              <button
+                role='edit'
+                aria-checked='false'
+                aria-label='Reschedule your todo task '
+                title='Reschedule your task'>
+                <ScheduleIcon className={classes['todo-list__action-schedule-icon']} />
               </button>
-              <button role='Comment task' title='Comment your task'>
-                <CommentIcon />
+              <button
+                role='edit'
+                aria-checked='false'
+                aria-label='Add extra comment your choice for the todo task'
+                title='Comment your task'>
+                <CommentIcon className={classes['todo-list__action-comment-icon']} />
               </button>
-              <button>
-                <TrashIcon />
+              <button
+                role='delete'
+                aria-checked='false'
+                aria-label='Delete your todo task'
+                title='Delete your task'>
+                <TrashIcon className={classes['todo-list__action-trash-icon']} />
               </button>
             </div>
           </li>

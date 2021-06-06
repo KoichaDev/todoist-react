@@ -19,7 +19,6 @@ export function UnCheckBoxIcon({ className }) {
       focusable='false'
       data-prefix='far'
       data-icon='circle'
-      class='svg-inline--fa fa-circle fa-w-16'
       role='img'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 512 512'
