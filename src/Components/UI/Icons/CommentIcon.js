@@ -1,12 +1,13 @@
 import React from 'react';
 
-function CommentIcon() {
+function CommentIcon({ className }) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
-      data-svgs-path='sm1/comments.svg'>
+      data-svgs-path='sm1/comments.svg'
+      className={className}>
       <path
         fill='currentColor'
         fillRule='nonzero'
