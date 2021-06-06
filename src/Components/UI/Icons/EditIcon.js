@@ -1,8 +1,8 @@
 import React from 'react';
 
-function EditIcon() {
+function EditIcon({ className }) {
   return (
-    <svg width='24' height='24'>
+    <svg width='24' height='24' className={className}>
       <g fill='none' fill-rule='evenodd'>
         <path fill='currentColor' d='M9.5 19h10a.5.5 0 110 1h-10a.5.5 0 110-1z'></path>
         <path

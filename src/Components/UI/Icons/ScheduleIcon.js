@@ -1,13 +1,14 @@
 import React from 'react';
 
-function ScheduleIcon() {
+function ScheduleIcon({ className }) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
       viewBox='0 0 24 24'
-      data-reach-tooltip-trigger=''>
+      data-reach-tooltip-trigger=''
+      className={className}>
       <path
         fill='currentColor'
         fillRule='nonzero'

@@ -1,12 +1,13 @@
 import React from 'react';
 
-function InboxIcon() {
+function InboxIcon({ className }) {
   return (
     <svg
       width='16'
       height='16'
       viewBox='0 0 16 16'
-      class='project_icon projectSectionPill--icon project_icon_inbox'>
+      class='project_icon projectSectionPill--icon project_icon_inbox'
+      className={className}>
       <g fill='currentColor'>
         <path
           d='M13.5 9.5V12a1.5 1.5 0 01-1.5 1.5H4A1.5 1.5 0 012.5 12V9.5h3.75a1.75 1.75 0 003.5 0h3.75z'
