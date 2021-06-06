@@ -17,6 +17,8 @@ const todoReducer = (todo, action) => {
       const updatedTasks = todo.items.concat(action.todo);
 
       return { ...todo, items: updatedTasks };
+    case ACTION.REMOVE_TODO:
+      return todo.items.filter((item) => item.id !== action.id);
     default:
       return todo;
   }
