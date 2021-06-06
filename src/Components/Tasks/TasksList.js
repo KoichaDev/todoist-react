@@ -7,15 +7,14 @@ import classes from './TasksList.module.scss';
 function TasksList() {
   const todoCtx = useContext(TodoContext);
 
-  const removeTaskHandler = (id) => {
-    todoCtx.removeTodo(id);
-  };
+  const deleteTaskHandler = (id) => todoCtx.removeTodo(id);
 
   const todoList = todoCtx.items.map((item) => {
+    const { id } = item;
     return (
-      <li key={item.id}>
+      <li key={id}>
         <ul className={classes['todo-list']}>
-          <Tasks {...item} />
+          <Tasks {...item} deleteHandler={deleteTaskHandler.bind(null, id)} />
         </ul>
       </li>
     );
