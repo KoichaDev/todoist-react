@@ -6,8 +6,9 @@ import CommentIcon from './../UI/Icons/CommentIcon';
 import TrashIcon from './../UI/Icons/TrashIcon';
 import classes from './Tasks.module.scss';
 
-function Tasks({ ...item }) {
-  const { id, task } = item;
+function Tasks({ deleteHandler, ...item }) {
+  const { task } = item;
+
   return (
     <>
       <li>
@@ -51,7 +52,7 @@ function Tasks({ ...item }) {
             aria-checked='false'
             aria-label='Delete your todo task'
             title='Delete your task'
-            onClick={(id) => console.log(id)}>
+            onClick={deleteHandler}>
             <TrashIcon className={classes['todo-list__action-trash-icon']} />
           </button>
         </div>
