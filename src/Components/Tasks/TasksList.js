@@ -1,5 +1,9 @@
 import { useContext } from 'react';
 import TodoContext from './../../store/todo-context';
+import { CheckBoxIcon, UnCheckBoxIcon } from './../UI/Icons/CheckBoxIcon';
+import EditIcon from './../UI/Icons/EditIcon';
+import ScheduleIcon from './../UI/Icons/ScheduleIcon';
+import CommentIcon from './../UI/Icons/CommentIcon';
 import classes from './TasksList.module.scss';
 
 function TasksList() {
@@ -9,19 +13,31 @@ function TasksList() {
     const { id, task } = item;
     return (
       <li key={id}>
-        <ul>
+        <ul className={classes['todo-list']}>
           <li>
-            <label htmlFor='checkbox'></label>
-            <input type='checkbox' id='checkbox' />
+            <div className={classes['todo-list__action-priority']}>
+              <button
+                type='button'
+                role='checkbox'
+                aria-checked='false'
+                aria-label='Mark task as Complete'>
+                <UnCheckBoxIcon />
+              </button>
+              <p>{task}</p>
+            </div>
           </li>
           <li>
-            <p>{task}</p>
-          </li>
-          <li>
-            <button>
-              <i class='far fa-edit'></i>
-              Edit
-            </button>
+            <div className={classes['todo-list__action']}>
+              <button role='Checkbox' title='Edit your task'>
+                <EditIcon />
+              </button>
+              <button role='re-schedule task' title='Reschedule your task'>
+                <ScheduleIcon />
+              </button>
+              <button role='Comment task' title='Comment your task'>
+                <CommentIcon />
+              </button>
+            </div>
           </li>
         </ul>
       </li>
@@ -29,9 +45,9 @@ function TasksList() {
   });
 
   return (
-    <div>
+    <>
       <ul>{todoList}</ul>
-    </div>
+    </>
   );
 }
 

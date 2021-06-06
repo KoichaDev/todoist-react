@@ -1,0 +1,30 @@
+.todo-list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 3px 0;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+
+  .todo-list__action-priority {
+    display: flex;
+
+    button {
+      margin-right: 1em;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .todo-list__action {
+    button {
+      margin-left: 8px;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import AddTask from './../../Tasks/AddTask';
-import TasksList from './../../Tasks/TasksList';
+import DisplayTask from './../../Tasks/DisplayTask';
 import classes from './Main.module.scss';
 
 function Main() {
@@ -9,7 +9,7 @@ function Main() {
         <span>Inbox</span>
       </h1>
       <AddTask />
-      <TasksList />
+      <DisplayTask />
     </main>
   );
 }
