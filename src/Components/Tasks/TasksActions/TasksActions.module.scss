@@ -1,39 +1,4 @@
-.todo-list__action-priority {
-  display: flex;
-
-  button {
-    margin-right: 1em;
-
-    svg {
-      width: 18px;
-      height: 18px;
-      transition: 0.3s;
-    }
-
-    .todo-list__action-unchecked-icon {
-      color: #808080;
-
-      &:hover {
-        color: #999999;
-      }
-    }
-
-    .todo-list__action-checked-icon {
-      background: transparent;
-      color: #299438;
-
-      &:hover {
-        color: #7ecc49;
-      }
-    }
-  }
-
-  p {
-    font-size: 14px;
-  }
-}
-
-.todo-list__action {
+.todo-list__actions {
   button {
     margin-left: 8px;
 
