@@ -6,16 +6,23 @@ import classes from './TasksList.module.scss';
 
 function TasksList() {
   const todoCtx = useContext(TodoContext);
+
   const deleteTaskHandler = (id) => todoCtx.removeTodo(id);
 
-  console.log(todoCtx);
+  const updateCheckboxTaskHandler = (id) => {
+    todoCtx.toggleComplete(id);
+  };
 
   const todoList = todoCtx.localStorage.map((item) => {
     const { id } = item;
     return (
       <li key={id}>
         <ul className={classes['todo-list']}>
-          <Tasks {...item} deleteHandler={deleteTaskHandler.bind(null, id)} />
+          <Tasks
+            {...item}
+            deleteHandler={deleteTaskHandler.bind(null, id)}
+            updateCheckboxTaskHandler={updateCheckboxTaskHandler.bind(null, id)}
+          />
         </ul>
       </li>
     );

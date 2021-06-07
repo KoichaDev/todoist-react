@@ -3,13 +3,14 @@ import useLocalStorage from './../state/hooks/useLocalStorage';
 import TodoContext from './todo-context';
 
 const ACTION = {
-  ADD_TODO: 'add-todo',
-  REMOVE_TODO: 'remove-todo',
+  ADD: 'add-todo',
+  TOGGLE_COMPLETE: 'toggle-complete',
+  REMOVE: 'remove-todo',
 };
 
 const todoReducer = (todo, action) => {
   switch (action.type) {
-    case ACTION.ADD_TODO:
+    case ACTION.ADD:
       // The concat() method is used to merge two or more arrays.
       // This method does not change the existing arrays, but instead returns a new array.
       // Concat gives us a brand new array instead of editing the old array in the memory, which is better solution
@@ -18,10 +19,18 @@ const todoReducer = (todo, action) => {
       const updatedTasks = todo.items.concat(action.todo);
 
       return { ...todo, items: updatedTasks };
-    case ACTION.REMOVE_TODO:
+    case ACTION.REMOVE:
       const taskFiltered = todo.items.filter((item) => item.id !== action.id);
 
       return { ...todo, items: taskFiltered };
+    case ACTION.TOGGLE_COMPLETE:
+      // return todo.items.map((todo) => {
+      //   if (todo.id === action.id) {
+      //     return { ...todo, completed: !todo.complete };
+      //   }
+      //   return todo;
+      // });
+      return;
     default:
       return todo;
   }
@@ -40,15 +49,27 @@ function TodoProvider({ children }) {
   const addTodoToListHandler = (todo) => {
     setLocalStorageTodos([...localStorageTodos, todo]);
     dispatchTodoAction({
-      type: ACTION.ADD_TODO,
+      type: ACTION.ADD,
       todo,
     });
+  };
+
+  const toggleTodoHandler = (id) => {
+    const checkBoxHandlerId = id;
+    const toggleComplete = localStorageTodos.map((localStorageTodo) => {
+      if (checkBoxHandlerId === localStorageTodo.id) {
+        return { ...localStorageTodo, completed: !localStorageTodo.completed };
+      }
+      return localStorageTodo;
+    });
+
+    setLocalStorageTodos(toggleComplete);
   };
 
   const removeTodoListHandler = (id) => {
     setLocalStorageTodos(localStorageTodos.filter((todo) => todo.id !== id));
     dispatchTodoAction({
-      type: ACTION.REMOVE_TODO,
+      type: ACTION.REMOVE,
       id,
     });
   };
@@ -58,6 +79,7 @@ function TodoProvider({ children }) {
     localStorage: localStorageTodos,
     totalAmount: todoState.totalAmount,
     addTodo: addTodoToListHandler,
+    toggleComplete: toggleTodoHandler,
     removeTodo: removeTodoListHandler,
   };
 

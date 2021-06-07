@@ -5,6 +5,7 @@ const TodoContext = createContext({
   localStorage: [],
   totalAmount: 0,
   addTodo: (task) => {},
+  toggleComplete: (id) => {},
   removeTodo: (id) => {},
 });
 
