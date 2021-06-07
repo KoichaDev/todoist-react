@@ -7,7 +7,13 @@ import TrashIcon from './../UI/Icons/TrashIcon';
 import classes from './Tasks.module.scss';
 
 function Tasks({ updateCheckboxTaskHandler, deleteHandler, ...item }) {
-  const { task } = item;
+  const { task, completed } = item;
+
+  let toggleCheckBoxIcon = completed ? (
+    <CheckBoxIcon className={classes['todo-list__action-checked-icon']} />
+  ) : (
+    <UnCheckBoxIcon className={classes['todo-list__action-unchecked-icon']} />
+  );
 
   return (
     <>
@@ -20,7 +26,7 @@ function Tasks({ updateCheckboxTaskHandler, deleteHandler, ...item }) {
             aria-label='Mark task as Complete'
             title='Mark as your Todo task is completed'
             onClick={updateCheckboxTaskHandler}>
-            <UnCheckBoxIcon classname={classes['todo-list__action-uncheck-icon']} />
+            {toggleCheckBoxIcon}
           </button>
           <p>{task}</p>
         </div>
