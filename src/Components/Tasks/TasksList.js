@@ -6,10 +6,11 @@ import classes from './TasksList.module.scss';
 
 function TasksList() {
   const todoCtx = useContext(TodoContext);
-
   const deleteTaskHandler = (id) => todoCtx.removeTodo(id);
 
-  const todoList = todoCtx.items.map((item) => {
+  console.log(todoCtx);
+
+  const todoList = todoCtx.localStorage.map((item) => {
     const { id } = item;
     return (
       <li key={id}>
