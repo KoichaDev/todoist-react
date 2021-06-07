@@ -1,4 +1,5 @@
-import { useReducer, useEffect } from 'react';
+import { useState, useReducer, useEffect } from 'react';
+import useLocalStorage from './../state/hooks/useLocalStorage';
 import TodoContext from './todo-context';
 
 const ACTION = {
@@ -28,13 +29,16 @@ const todoReducer = (todo, action) => {
 
 const defaultTodoState = {
   items: [],
+  localStorage: window.localStorage.getItem('todos'),
   totalAmount: 0,
 };
 
 function TodoProvider({ children }) {
+  const [localStorageTodos, setLocalStorageTodos] = useLocalStorage('todos', []);
   const [todoState, dispatchTodoAction] = useReducer(todoReducer, defaultTodoState);
 
   const addTodoToListHandler = (todo) => {
+    setLocalStorageTodos([...localStorageTodos, todo]);
     dispatchTodoAction({
       type: ACTION.ADD_TODO,
       todo,
@@ -42,6 +46,8 @@ function TodoProvider({ children }) {
   };
 
   const removeTodoListHandler = (id) => {
+    // setLocalStorageTodos(localStorageTodos.filter((todo) => todo.id !== id));
+
     dispatchTodoAction({
       type: ACTION.REMOVE_TODO,
       id,
@@ -50,6 +56,7 @@ function TodoProvider({ children }) {
 
   const todoContext = {
     items: todoState.items,
+    localStorage: localStorageTodos,
     totalAmount: todoState.totalAmount,
     addTodo: addTodoToListHandler,
     removeTodo: removeTodoListHandler,

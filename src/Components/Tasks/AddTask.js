@@ -5,7 +5,6 @@ import TodoContext from './../../store/todo-context';
 
 function AddTask() {
   const [toggleSubmitClass, setToggleSubmitClass] = useState('');
-  const [isDisplay, setIsDisplay] = useState(true);
   const [task, setTask] = useState('');
 
   const todoCtx = useContext(TodoContext);
@@ -24,9 +23,6 @@ function AddTask() {
 
     todoCtx.addTodo({ id: uuid(), task });
 
-    // setTodo((prevTodo) => {
-    //   return [...prevTodo, task];
-    // });
     setTask('');
   };
 
