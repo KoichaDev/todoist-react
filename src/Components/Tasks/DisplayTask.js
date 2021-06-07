@@ -9,7 +9,7 @@ function DisplayTask() {
   if (todoCtx.localStorage.length > 0) {
     todoTaskContent = (
       <section className={classes['task-section']}>
-        <h2>Total Task: {todoCtx.localStorage.length} </h2>
+        <h2>✨ Total Task: {todoCtx.localStorage.length} </h2>
         <div className={classes['display-task']}>
           <TasksList />
         </div>

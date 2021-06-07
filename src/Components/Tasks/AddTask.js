@@ -26,7 +26,7 @@ function AddTask() {
       return;
     }
 
-    todoCtx.addTodo({ id: uuid(), task });
+    todoCtx.addTodo({ id: uuid(), task, completed: false });
 
     setTask('');
   };

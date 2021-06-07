@@ -6,7 +6,7 @@ function Main() {
   return (
     <main className={classes.main}>
       <h1>
-        <span>Inbox</span>
+        <span>📝 Add Task</span>
       </h1>
       <AddTask />
       <DisplayTask />
