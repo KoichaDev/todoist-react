@@ -54,6 +54,21 @@ function TodoProvider({ children }) {
     });
   };
 
+  const editTodoTaskHandler = (id, task) => {
+    // Can't be empty value
+    if (task.length < 1) {
+      return;
+    }
+
+    const updateTask = localStorageTodos.map((localStorageTodo) => {
+      if (id === localStorageTodo.id) {
+        return { ...localStorageTodo, task };
+      }
+      return localStorageTodo;
+    });
+    setLocalStorageTodos(updateTask);
+  };
+
   const toggleTodoHandler = (id) => {
     const checkBoxHandlerId = id;
     const toggleComplete = localStorageTodos.map((localStorageTodo) => {
@@ -64,6 +79,7 @@ function TodoProvider({ children }) {
     });
 
     setLocalStorageTodos(toggleComplete);
+    // TODO: Add useReducer for toggling on/off of the state
   };
 
   const removeTodoListHandler = (id) => {
@@ -79,6 +95,7 @@ function TodoProvider({ children }) {
     localStorage: localStorageTodos,
     totalAmount: todoState.totalAmount,
     addTodo: addTodoToListHandler,
+    editTodo: editTodoTaskHandler,
     toggleComplete: toggleTodoHandler,
     removeTodo: removeTodoListHandler,
   };
