@@ -46,8 +46,7 @@ function TodoProvider({ children }) {
   };
 
   const removeTodoListHandler = (id) => {
-    // setLocalStorageTodos(localStorageTodos.filter((todo) => todo.id !== id));
-
+    setLocalStorageTodos(localStorageTodos.filter((todo) => todo.id !== id));
     dispatchTodoAction({
       type: ACTION.REMOVE_TODO,
       id,
