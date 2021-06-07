@@ -21,6 +21,11 @@ function AddTask() {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    // Prevent empty input field can't be updated.
+    if (task.length < 1) {
+      return;
+    }
+
     todoCtx.addTodo({ id: uuid(), task });
 
     setTask('');
