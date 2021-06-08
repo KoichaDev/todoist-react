@@ -31,8 +31,13 @@ function Tasks({ deleteTask, editTask, toggleCompleteTask, ...item }) {
 
   const deleteTaskHandler = (id) => deleteTask(id);
 
-  const cancelEditModeHandler = () => {
-    setIsEditingMode(false);
+  const cancelEditModeHandler = () => setIsEditingMode(false);
+
+  const escapeEditModeHandler = (e) => {
+    const escKey = e.keyCode === 27;
+    if (escKey) {
+      setIsEditingMode(false);
+    }
   };
 
   const submitHandler = (e) => {
@@ -42,12 +47,14 @@ function Tasks({ deleteTask, editTask, toggleCompleteTask, ...item }) {
       return;
     }
 
+    if (isEditingMode) {
+      editClassName = classes['todo-list'];
+    }
+
     // This is from the contextProvider for storing localStorage
     editTask(id, enteredEditInput);
 
     setIsEditingMode(false);
-
-    if (isEditingMode) editClassName = classes['todo-list'];
   };
 
   // All of the condition check to render JSX
@@ -57,6 +64,7 @@ function Tasks({ deleteTask, editTask, toggleCompleteTask, ...item }) {
         <TaskEdit
           ref={editInputRef}
           onSubmit={submitHandler}
+          onKeyPress={escapeEditModeHandler}
           onChange={editCurrentTaskHandler}
           onClick={cancelEditModeHandler}
           value={enteredEditInput}
