@@ -1,0 +1,55 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  li {
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 13px;
+
+    &:hover {
+      background: #363636;
+    }
+
+    &:first-child {
+      svg {
+        margin-bottom: -3px;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 1em;
+    }
+
+    button {
+      display: flex;
+      gap: 8px;
+    }
+
+    select {
+      position: relative;
+      width: 85%;
+      margin-top: 1em;
+      background: #282828;
+      color: #e2e2e2;
+      border: none;
+      outline: none;
+      scroll-behavior: smooth;
+      cursor: pointer;
+      -webkit-appearance: none;
+
+      &:hover {
+        background: #363636;
+      }
+
+      option {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        border-radius: 0px 10px;
+      }
+    }
+  }
+}

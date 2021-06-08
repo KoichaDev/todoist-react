@@ -1,6 +1,27 @@
 .task-section {
   margin-top: 2em;
 
+  .task-section__header {
+    position: relative;
+
+    .task-section__nav {
+      display: flex;
+      justify-content: space-between;
+      margin: auto;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .task-section__menu {
+      position: absolute;
+      top: 95%;
+      right: -3%;
+      background: #282828;
+      border-color: #171717;
+      box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+    }
+  }
+
   h2 {
     font-weight: bold;
   }
