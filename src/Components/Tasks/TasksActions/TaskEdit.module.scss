@@ -1,0 +1,32 @@
+.edit-todo {
+  input {
+    color: #8b8b8b;
+    background: #171717;
+    font-size: 13px;
+    width: 100%;
+    height: 2em;
+    border: none;
+    padding: 1em;
+    margin-top: 8px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    &:focus-within {
+      outline: none;
+    }
+  }
+
+  button {
+    display: block;
+    font-size: 13px;
+    color: #fff;
+    background: #de4c4a;
+    margin-top: 8px;
+    padding: 3px 10px;
+    border: 1px solid #de4c4a;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+}
