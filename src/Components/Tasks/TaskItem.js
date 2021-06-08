@@ -1,17 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
-import { CheckBoxIcon, UnCheckBoxIcon } from '../UI/Icons/CheckBoxIcon';
-import EditIcon from '../UI/Icons/EditIcon';
-import ScheduleIcon from '../UI/Icons/ScheduleIcon';
-import CommentIcon from '../UI/Icons/CommentIcon';
-import TrashIcon from '../UI/Icons/TrashIcon';
-import classes from './Tasks.module.scss';
+import TaskEdit from './TasksActions/TaskEdit';
+import TasksPriority from './TasksActions/TaskPriority';
+import TasksActions from './TasksActions/TaskActions';
+import classes from './TaskItem.module.scss';
 
-function Tasks({ deleteHandler, editTodo, updateCheckboxTaskHandler, ...item }) {
+function Tasks({ deleteTask, editTask, toggleCompleteTask, ...item }) {
   const { id, task, completed } = item;
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [enteredEditInput, setEnteredEditInput] = useState(task);
   const editInputRef = useRef(null);
 
+  let toggleEditModeContent = '';
   let editClassName = !isEditingMode ? classes['todo-list'] : classes['todo-list--edit-mode'];
 
   useEffect(() => {
@@ -20,6 +19,7 @@ function Tasks({ deleteHandler, editTodo, updateCheckboxTaskHandler, ...item }) 
     }
   }, [isEditingMode]);
 
+  // All of the Event Handler
   const activateEditTaskHandler = () => setIsEditingMode(!isEditingMode);
 
   const editCurrentTaskHandler = (e) => {
@@ -27,93 +27,61 @@ function Tasks({ deleteHandler, editTodo, updateCheckboxTaskHandler, ...item }) 
     setEnteredEditInput(e.target.value);
   };
 
+  const updateCheckboxTaskHandler = (id) => toggleCompleteTask(id);
+
+  const deleteTaskHandler = (id) => deleteTask(id);
+
   const submitHandler = (e) => {
     e.preventDefault();
 
     // This is from the contextProvider for storing localStorage
-    editTodo(id, enteredEditInput);
+    editTask(id, enteredEditInput);
+
     setIsEditingMode(false);
 
     if (isEditingMode) editClassName = classes['todo-list'];
   };
 
-  const editContentMode = (
-    <form onSubmit={submitHandler} className={classes['edit-todo']}>
-      <label htmlFor={`task-input-${task}`} />
-      <input
-        ref={editInputRef}
-        type='text'
-        id={`task-input-${task}`}
-        value={enteredEditInput}
-        onChange={editCurrentTaskHandler}
-      />
-      <button
-        type='submit'
-        aria-label={`Edit your current todo task of '${task}'`}
-        title={`Edit your current task '${task}'`}>
-        Update
-      </button>
-    </form>
-  );
+  // All of the condition check to render JSX
+  if (isEditingMode) {
+    toggleEditModeContent = (
+      <>
+        <TaskEdit
+          ref={editInputRef}
+          onSubmit={submitHandler}
+          onChange={editCurrentTaskHandler}
+          value={enteredEditInput}
+          task={task}
+        />
+      </>
+    );
+  } else {
+    toggleEditModeContent = (
+      <>
+        <p>{task}</p>
+      </>
+    );
+  }
 
-  const toggleEditMode = isEditingMode ? editContentMode : <p>{task}</p>;
-
-  const toggleCheckBoxIcon = completed ? (
-    <CheckBoxIcon className={classes['todo-list__action-checked-icon']} />
+  const isEditingContent = !isEditingMode ? (
+    <TasksActions
+      editTask={activateEditTaskHandler}
+      deleteTask={deleteTaskHandler.bind(null, id)}
+    />
   ) : (
-    <UnCheckBoxIcon className={classes['todo-list__action-unchecked-icon']} />
+    ''
   );
 
   return (
     <ul className={editClassName}>
       <li>
-        <div className={classes['todo-list__action-priority']}>
-          <button
-            type='button'
-            role='checkbox'
-            aria-checked='false'
-            aria-label='Mark task as Complete'
-            title='Mark as your Todo task is completed'
-            onClick={updateCheckboxTaskHandler}>
-            {toggleCheckBoxIcon}
-          </button>
-          {toggleEditMode}
-        </div>
+        <TasksPriority
+          onClick={updateCheckboxTaskHandler.bind(null, id)}
+          toggleEditMode={toggleEditModeContent}
+          isCompleted={completed}
+        />
       </li>
-      <li>
-        <div className={classes['todo-list__action']}>
-          <button
-            role='checkbox'
-            aria-checked='false'
-            aria-label='Mark task as Complete'
-            title='Edit your task'
-            onClick={activateEditTaskHandler}>
-            <EditIcon className={classes['todo-list__action-edit-icon']} />
-          </button>
-          <button
-            role='edit'
-            aria-checked='false'
-            aria-label='Reschedule your todo task '
-            title='Reschedule your task'>
-            <ScheduleIcon className={classes['todo-list__action-schedule-icon']} />
-          </button>
-          <button
-            role='edit'
-            aria-checked='false'
-            aria-label='Add extra comment your choice for the todo task'
-            title='Comment your task'>
-            <CommentIcon className={classes['todo-list__action-comment-icon']} />
-          </button>
-          <button
-            role='delete'
-            aria-checked='false'
-            aria-label='Delete your todo task'
-            title='Delete your task'
-            onClick={deleteHandler}>
-            <TrashIcon className={classes['todo-list__action-trash-icon']} />
-          </button>
-        </div>
-      </li>
+      <li>{isEditingContent}</li>
     </ul>
   );
 }

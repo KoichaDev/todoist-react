@@ -1,0 +1,41 @@
+.todo-list__actions {
+  button {
+    margin-left: 8px;
+
+    svg {
+      transition: 0.3s;
+    }
+
+    .todo-list__action-edit-icon {
+      color: #ff9933;
+
+      &:hover {
+        color: #fad000;
+      }
+    }
+
+    .todo-list__action-schedule-icon {
+      color: #299438;
+
+      &:hover {
+        color: #7ecc49;
+      }
+    }
+
+    .todo-list__action-comment-icon {
+      color: #4073ff;
+
+      &:hover {
+        color: #96c3eb;
+      }
+    }
+
+    .todo-list__action-trash-icon {
+      color: #db4035;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}

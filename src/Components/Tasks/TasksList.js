@@ -1,35 +1,23 @@
 import { useState, useEffect, useContext } from 'react';
 import TodoContext from './../../store/todo-context';
-import Tasks from './TaskItem';
+import TasksItem from './TaskItem';
 
 function TasksList() {
   const todoCtx = useContext(TodoContext);
-  const deleteTaskHandler = (id) => todoCtx.removeTodo(id);
 
-  const updateCheckboxTaskHandler = (id) => {
-    todoCtx.toggleComplete(id);
-  };
-
-  const todoList = todoCtx.localStorage.map((item, index) => {
-    const { id } = item;
+  const todoList = todoCtx.localStorage.map((item) => {
     return (
-      <Tasks
-        key={id}
+      <TasksItem
+        key={item.id}
+        deleteTask={todoCtx.removeTodo}
+        editTask={todoCtx.editTodo}
+        toggleCompleteTask={todoCtx.toggleComplete}
         {...item}
-        updateCheckboxTaskHandler={updateCheckboxTaskHandler.bind(null, id)}
-        deleteHandler={deleteTaskHandler.bind(null, id)}
-        editTodo={todoCtx.editTodo}
       />
     );
   });
 
-  return (
-    <>
-      <ul>
-        <li>{todoList}</li>{' '}
-      </ul>
-    </>
-  );
+  return <>{todoList}</>;
 }
 
 export default TasksList;

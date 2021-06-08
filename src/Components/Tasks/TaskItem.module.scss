@@ -1,0 +1,21 @@
+.todo-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 6px;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+
+.todo-list--edit-mode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 6px;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+  background: #171717;
+  border: 1px solid #8b8b8b;
+  border-radius: 5px;
+  border-width: thin;
+}
