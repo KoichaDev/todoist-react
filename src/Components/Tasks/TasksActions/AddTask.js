@@ -39,12 +39,32 @@ function AddTask() {
     setTask('');
   };
 
+  const resetFormHandler = (e) => {
+    const escKey = e.keyCode === 27;
+    if (escKey) {
+      setTask('');
+    }
+  };
+
   const inputTaskHandler = (e) => setTask(e.target.value);
 
   const CancelHandler = () => setTask('');
 
+  const cancelButtonContent =
+    task.length > 1 ? (
+      <button
+        type='submit'
+        aria-label='Cancel your task assignment if no need to use'
+        title='Cancel the Task'
+        onClick={CancelHandler}>
+        <span style={{ fontSize: '13px' }}>Cancel</span>
+      </button>
+    ) : (
+      ''
+    );
+
   return (
-    <form onSubmit={submitHandler} className={classes.form}>
+    <form onSubmit={submitHandler} onKeyDown={resetFormHandler} className={classes.form}>
       <label htmlFor='add-item' />
       <input
         type='text'
@@ -70,13 +90,7 @@ function AddTask() {
         aria-roledescription='Add a task first before you can click on it'>
         Add Task
       </button>
-      <button
-        type='submit'
-        aria-label='Cancel your task assignment if no need to use'
-        title='Cancel the Task'
-        onClick={CancelHandler}>
-        <span style={{ fontSize: '13px' }}>Cancel</span>
-      </button>
+      {cancelButtonContent}
     </form>
   );
 }
