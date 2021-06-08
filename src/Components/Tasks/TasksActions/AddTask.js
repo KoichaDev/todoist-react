@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import uuid from 'react-uuid';
 import classes from './Addtask.module.scss';
-import TodoContext from './../../store/todo-context';
+import TodoContext from '../../../store/todo-context';
 
 function AddTask() {
   const [toggleSubmitClass, setToggleSubmitClass] = useState('');

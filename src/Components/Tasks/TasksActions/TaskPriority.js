@@ -2,12 +2,8 @@ import React from 'react';
 import { CheckBoxIcon, UnCheckBoxIcon } from '../../UI/Icons/CheckBoxIcon';
 import classes from './TaskPriority.module.scss';
 
-function TasksPriority({ isEditingMode, editContentMode, updateCheckboxTaskHandler, ...item }) {
-  const { task, completed } = item;
-
-  const toggleEditMode = isEditingMode ? editContentMode : <p>{task}</p>;
-
-  const toggleCheckBoxIcon = completed ? (
+function TasksPriority({ toggleEditMode, onClick, isCompleted }) {
+  const toggleCheckBoxIcon = isCompleted ? (
     <CheckBoxIcon className={classes['todo-list__action-checked-icon']} />
   ) : (
     <UnCheckBoxIcon className={classes['todo-list__action-unchecked-icon']} />
@@ -20,7 +16,7 @@ function TasksPriority({ isEditingMode, editContentMode, updateCheckboxTaskHandl
         aria-checked='false'
         aria-label='Mark task as Complete'
         title='Mark as your Todo task is completed'
-        onClick={updateCheckboxTaskHandler}>
+        onClick={onClick}>
         {toggleCheckBoxIcon}
       </button>
       {toggleEditMode}

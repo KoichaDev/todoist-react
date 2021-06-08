@@ -4,12 +4,13 @@ import TasksPriority from './TasksActions/TaskPriority';
 import TasksActions from './TasksActions/TaskActions';
 import classes from './TaskItem.module.scss';
 
-function Tasks({ deleteHandler, editTodo, updateCheckboxTaskHandler, ...item }) {
+function Tasks({ deleteTask, editTask, toggleCompleteTask, ...item }) {
   const { id, task, completed } = item;
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [enteredEditInput, setEnteredEditInput] = useState(task);
   const editInputRef = useRef(null);
 
+  let toggleEditModeContent = '';
   let editClassName = !isEditingMode ? classes['todo-list'] : classes['todo-list--edit-mode'];
 
   useEffect(() => {
@@ -18,6 +19,7 @@ function Tasks({ deleteHandler, editTodo, updateCheckboxTaskHandler, ...item }) 
     }
   }, [isEditingMode]);
 
+  // All of the Event Handler
   const activateEditTaskHandler = () => setIsEditingMode(!isEditingMode);
 
   const editCurrentTaskHandler = (e) => {
@@ -25,39 +27,61 @@ function Tasks({ deleteHandler, editTodo, updateCheckboxTaskHandler, ...item }) 
     setEnteredEditInput(e.target.value);
   };
 
+  const updateCheckboxTaskHandler = (id) => toggleCompleteTask(id);
+
+  const deleteTaskHandler = (id) => deleteTask(id);
+
   const submitHandler = (e) => {
     e.preventDefault();
 
     // This is from the contextProvider for storing localStorage
-    editTodo(id, enteredEditInput);
+    editTask(id, enteredEditInput);
+
     setIsEditingMode(false);
 
     if (isEditingMode) editClassName = classes['todo-list'];
   };
 
-  const editContentMode = (
-    <TaskEdit
-      task={task}
-      onSubmit={submitHandler}
-      ref={editInputRef}
-      value={enteredEditInput}
-      onChange={editCurrentTaskHandler}
+  // All of the condition check to render JSX
+  if (isEditingMode) {
+    toggleEditModeContent = (
+      <>
+        <TaskEdit
+          ref={editInputRef}
+          onSubmit={submitHandler}
+          onChange={editCurrentTaskHandler}
+          value={enteredEditInput}
+          task={task}
+        />
+      </>
+    );
+  } else {
+    toggleEditModeContent = (
+      <>
+        <p>{task}</p>
+      </>
+    );
+  }
+
+  const isEditingContent = !isEditingMode ? (
+    <TasksActions
+      editTask={activateEditTaskHandler}
+      deleteTask={deleteTaskHandler.bind(null, id)}
     />
+  ) : (
+    ''
   );
 
   return (
     <ul className={editClassName}>
       <li>
         <TasksPriority
-          updateCheckboxTaskHandler={updateCheckboxTaskHandler}
-          isEditingMode={isEditingMode}
-          editContentMode={editContentMode}
-          {...item}
+          onClick={updateCheckboxTaskHandler.bind(null, id)}
+          toggleEditMode={toggleEditModeContent}
+          isCompleted={completed}
         />
       </li>
-      <li>
-        <TasksActions editTask={activateEditTaskHandler} deleteTask={deleteHandler} />
-      </li>
+      <li>{isEditingContent}</li>
     </ul>
   );
 }

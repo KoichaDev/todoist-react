@@ -1,4 +1,4 @@
-import AddTask from './../../Tasks/AddTask';
+import AddTask from './../../Tasks/TasksActions/AddTask';
 import DisplayTask from './../../Tasks/DisplayTask';
 import classes from './Main.module.scss';
 
