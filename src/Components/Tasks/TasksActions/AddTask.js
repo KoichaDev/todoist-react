@@ -1,12 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import uuid from 'react-uuid';
+import { format } from 'date-fns';
+
 import classes from './Addtask.module.scss';
 import TodoContext from '../../../store/todo-context';
 
 function AddTask() {
-  const [toggleSubmitClass, setToggleSubmitClass] = useState('');
+  const todaysDate = format(new Date(), 'dd.MM.yyyy');
   const [task, setTask] = useState('');
-
+  const [toggleSubmitClass, setToggleSubmitClass] = useState('');
   const todoCtx = useContext(TodoContext);
 
   // useEffect for toggling className on Add Task on the submit button
@@ -26,7 +28,13 @@ function AddTask() {
       return;
     }
 
-    todoCtx.addTodo({ id: uuid(), task, completed: false });
+    todoCtx.addTodo({
+      id: uuid(),
+      task,
+      completed: false,
+      date: todaysDate,
+      timestamp: Date.now(),
+    });
 
     setTask('');
   };
