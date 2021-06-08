@@ -31,8 +31,16 @@ function Tasks({ deleteTask, editTask, toggleCompleteTask, ...item }) {
 
   const deleteTaskHandler = (id) => deleteTask(id);
 
+  const cancelEditModeHandler = () => {
+    setIsEditingMode(false);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (enteredEditInput.length === 0) {
+      return;
+    }
 
     // This is from the contextProvider for storing localStorage
     editTask(id, enteredEditInput);
@@ -50,6 +58,7 @@ function Tasks({ deleteTask, editTask, toggleCompleteTask, ...item }) {
           ref={editInputRef}
           onSubmit={submitHandler}
           onChange={editCurrentTaskHandler}
+          onClick={cancelEditModeHandler}
           value={enteredEditInput}
           task={task}
         />
@@ -77,6 +86,7 @@ function Tasks({ deleteTask, editTask, toggleCompleteTask, ...item }) {
       <li>
         <TasksPriority
           onClick={updateCheckboxTaskHandler.bind(null, id)}
+          isEditingMode={isEditingMode}
           toggleEditMode={toggleEditModeContent}
           isCompleted={completed}
         />

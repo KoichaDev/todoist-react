@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import classes from './TaskEdit.module.scss';
 
-function TaskEdit({ onSubmit, task, value, onChange }, ref) {
+function TaskEdit({ onSubmit, task, value, onChange, onClick }, ref) {
   return (
     <form onSubmit={onSubmit} className={classes['edit-todo']}>
       <label htmlFor={`task-input-${task}`} />
@@ -12,6 +12,7 @@ function TaskEdit({ onSubmit, task, value, onChange }, ref) {
         title={`Edit your current task '${task}'`}>
         Update
       </button>
+      <button onClick={onClick}>Cancel</button>
     </form>
   );
 }
