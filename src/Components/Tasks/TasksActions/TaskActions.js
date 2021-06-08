@@ -3,11 +3,11 @@ import EditIcon from '../../UI/Icons/EditIcon';
 import ScheduleIcon from '../../UI/Icons/ScheduleIcon';
 import CommentIcon from '../../UI/Icons/CommentIcon';
 import TrashIcon from '../../UI/Icons/TrashIcon';
-import classes from './TasksActions.module.scss';
+import classes from './TaskActions.module.scss';
 
 function TasksActions({ editTask, deleteTask }) {
   return (
-    <div className={classes['todo-list__actionss']}>
+    <div className={classes['todo-list__actions']}>
       <button
         role='checkbox'
         aria-checked='false'

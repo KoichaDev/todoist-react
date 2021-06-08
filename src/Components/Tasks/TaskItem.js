@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { CheckBoxIcon, UnCheckBoxIcon } from '../UI/Icons/CheckBoxIcon';
-import TasksActions from './TasksActions/TasksActions';
+import TaskEdit from './TasksActions/TaskEdit';
+import TasksPriority from './TasksActions/TaskPriority';
+import TasksActions from './TasksActions/TaskActions';
 import classes from './TaskItem.module.scss';
 
 function Tasks({ deleteHandler, editTodo, updateCheckboxTaskHandler, ...item }) {
@@ -35,47 +36,24 @@ function Tasks({ deleteHandler, editTodo, updateCheckboxTaskHandler, ...item }) 
   };
 
   const editContentMode = (
-    <form onSubmit={submitHandler} className={classes['edit-todo']}>
-      <label htmlFor={`task-input-${task}`} />
-      <input
-        ref={editInputRef}
-        type='text'
-        id={`task-input-${task}`}
-        value={enteredEditInput}
-        onChange={editCurrentTaskHandler}
-      />
-      <button
-        type='submit'
-        aria-label={`Edit your current todo task of '${task}'`}
-        title={`Edit your current task '${task}'`}>
-        Update
-      </button>
-    </form>
-  );
-
-  const toggleEditMode = isEditingMode ? editContentMode : <p>{task}</p>;
-
-  const toggleCheckBoxIcon = completed ? (
-    <CheckBoxIcon className={classes['todo-list__action-checked-icon']} />
-  ) : (
-    <UnCheckBoxIcon className={classes['todo-list__action-unchecked-icon']} />
+    <TaskEdit
+      task={task}
+      onSubmit={submitHandler}
+      ref={editInputRef}
+      value={enteredEditInput}
+      onChange={editCurrentTaskHandler}
+    />
   );
 
   return (
     <ul className={editClassName}>
       <li>
-        <div className={classes['todo-list__action-priority']}>
-          <button
-            type='button'
-            role='checkbox'
-            aria-checked='false'
-            aria-label='Mark task as Complete'
-            title='Mark as your Todo task is completed'
-            onClick={updateCheckboxTaskHandler}>
-            {toggleCheckBoxIcon}
-          </button>
-          {toggleEditMode}
-        </div>
+        <TasksPriority
+          updateCheckboxTaskHandler={updateCheckboxTaskHandler}
+          isEditingMode={isEditingMode}
+          editContentMode={editContentMode}
+          {...item}
+        />
       </li>
       <li>
         <TasksActions editTask={activateEditTaskHandler} deleteTask={deleteHandler} />
