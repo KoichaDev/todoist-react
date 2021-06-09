@@ -28,7 +28,6 @@
     }
 
     select {
-      position: relative;
       width: 85%;
       margin-top: 1em;
       background: #282828;
@@ -44,10 +43,6 @@
       }
 
       option {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
         border-radius: 0px 10px;
       }
     }

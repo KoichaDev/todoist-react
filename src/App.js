@@ -2,15 +2,15 @@ import React from 'react';
 import Header from './Components/UI/Header/Header';
 import Main from './Components/UI/Main/Main';
 import SideBar from './Components/UI/Sidebar/SideBar';
-import TodoProvider from './store/TodoProvider';
+import SortProvider from './store/SortProvider';
 
 function App() {
   return (
-    <TodoProvider>
+    <SortProvider>
       <Header />
       <SideBar />
       <Main />
-    </TodoProvider>
+    </SortProvider>
   );
 }
 
