@@ -1,8 +1,10 @@
 import { useState, useContext } from 'react';
 import TodoContext from './../../store/todo-context';
+import SortContext from './../../store/sort-context';
 import SortTaskMenu from './SortTasks/SortTaskMenu';
-import SortTaskList from './SortTasks/SortTaskList';
+import SortTaskListActions from './SortTasks/SortTaskListActions';
 import TasksList from './TasksList';
+import TaskListSort from './TasksListSort';
 import classes from './DisplayTask.module.scss';
 
 function DisplayTask() {
@@ -11,12 +13,15 @@ function DisplayTask() {
   const [isActive, setIsActive] = useState(false);
 
   const todoCtx = useContext(TodoContext);
+  const sortCtx = useContext(SortContext);
 
   const sortTaskListHandler = () => setIsActive(!isActive);
 
   if (isActive) {
-    sortTaskListContent = <SortTaskList className={classes['task-menu__list']} />;
+    sortTaskListContent = <SortTaskListActions className={classes['task-menu__list']} />;
   }
+
+  const toggleTaskList = sortCtx.mouseClicked === true ? <TaskListSort /> : <TasksList />;
 
   if (todoCtx.localStorage.length > 0) {
     todoTaskContent = (
@@ -28,9 +33,7 @@ function DisplayTask() {
           </nav>
           <nav className={classes['task-section__menu']}>{sortTaskListContent}</nav>
         </header>
-        <div className={classes['display-task']}>
-          <TasksList />
-        </div>
+        <div className={classes['display-task']}>{toggleTaskList}</div>
       </section>
     );
   }

@@ -1,22 +1,18 @@
 import { useContext } from 'react';
 import AlphabeticalIcon from '../../UI/Icons/AlphabeticalIcon';
 import SortSizeUpDown from '../../UI/Icons/SortSizeUpDown';
-import SortSizeDown from '../../UI/Icons/SortSizeDown';
-import SortSizeUp from '../../UI/Icons/SortSizeUp';
+import CalendarIcon from '../../UI/Icons/CalendarIcon';
 import TimeStamp from '../../UI/Icons/TimeStampIcon';
-import TodoContext from './../../../store/todo-context';
-import SortContext from './../../../store/sort-context';
+import TodoContext from '../../../store/todo-context';
+import SortContext from '../../../store/sort-context';
 
-import classes from './SortTaskList.module.scss';
+import classes from './SortTaskListActions.module.scss';
 
 function SortTaskList() {
   const sortCtx = useContext(SortContext);
   const todoCtx = useContext(TodoContext);
 
-  const sortDateHandler = () => {
-    sortCtx.sortDate(todoCtx.localStorage);
-    console.log(sortCtx.items);
-  };
+  const sortDateHandler = () => sortCtx.sortDate(todoCtx.localStorage);
 
   return (
     <ul className={classes.list}>
@@ -33,12 +29,7 @@ function SortTaskList() {
       </li>
       <li>
         <button onClick={sortDateHandler}>
-          <SortSizeUp /> Sort by date (Ascending)
-        </button>
-      </li>
-      <li>
-        <button>
-          <SortSizeDown /> Sort by date (Descending)
+          <CalendarIcon /> Sort by date
         </button>
       </li>
       <li>

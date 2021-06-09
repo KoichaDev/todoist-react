@@ -1,4 +1,4 @@
-import { useState, useReducer, useContext } from 'react';
+import { useState, useEffect, useReducer, useContext } from 'react';
 import TodoContext from './todo-context';
 import SortContext from './sort-context';
 
@@ -9,6 +9,7 @@ const ACTION = {
 const sortReducer = (state, action) => {
   switch (action.type) {
     case ACTION.SORT:
+      console.log(action);
       let countClicked = action.todoList.countClicked;
 
       // Check if number is even based on the number we counted amount of clicked from the mouse
@@ -27,14 +28,18 @@ const defaultSortState = {
 };
 
 function SortProvider({ children }) {
+  const [mouseClicked, setMouseClicked] = useState(false);
   const [countClicked, setCountClicked] = useState(0);
   const [sortState, dispatchSortAction] = useReducer(sortReducer, defaultSortState);
 
   const sortDateHandler = (items) => {
+    setMouseClicked(true);
     setCountClicked(countClicked + 1);
+
     dispatchSortAction({
       type: ACTION.SORT,
       todoList: {
+        mouseClicked,
         countClicked,
         items,
       },
@@ -43,6 +48,7 @@ function SortProvider({ children }) {
 
   const sortContext = {
     items: sortState.items,
+    mouseClicked: mouseClicked,
     sortDate: sortDateHandler,
     sortTimeStamp: (timeStamp) => {},
   };
